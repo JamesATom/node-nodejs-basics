@@ -1,7 +1,10 @@
-const fs = require("node:fs");
+import fs from 'node:fs';
+import { fileToUrl } from "../utils/utils.js";
+
+const dirName = fileToUrl(import.meta.url);
 
 const copy = async () => {
-    console.log('hello world');
+    console.log('hello world: ', dirName);
 };
 
 copy();
