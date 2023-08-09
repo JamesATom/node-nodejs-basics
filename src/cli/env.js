@@ -1,4 +1,3 @@
-
 const envVar = process.env;
 
 const parseEnv = () => {
