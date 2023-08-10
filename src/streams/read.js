@@ -7,8 +7,18 @@ const dirName = fileToUrl(import.meta.url);
 const srcFile = path.join(dirName, 'files', 'fileToRead.txt');
 
 const read = async () => {
-    const content = fs.createReadStream(srcFile, { encoding: 'utf-8' });
-    content.pipe(process.stdout);
+    const contentStream = fs.createReadStream(srcFile, { encoding: 'utf-8' });
+    let data = '';
+    contentStream.on('data', chunk => process.stdout.write(chunk));
+    // contentStream.on('data', (chunk) => {
+    //     data += chunk;
+    // });
+    // contentStream.on('end', () => {
+    //     console.log(data);
+    // });
+    contentStream.on('error', (err) => {
+        console.log('FS operation error: => ', err);
+    });
 };
 
 await read();
